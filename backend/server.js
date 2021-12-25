@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
 });
 
 // defining port number
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 13836;
 
 // listing on port
 app.listen(PORT, () => {
