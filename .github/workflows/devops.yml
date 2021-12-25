@@ -1,0 +1,19 @@
+name: Build and deploy
+
+on:
+  push:
+    branch:
+      - master
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "checkout"
+        uses: actions/checkout@master
+
+  unit-test-2:
+    runs-on: ubuntu-latest
+
+  build:
+    runs-on: ubuntu-latest
