@@ -18,3 +18,7 @@ export {default as UsetBucketList} from require('./user/userBucketList.model')
 export {default as UserCartMpa} from require('./user/userCart.model')
 export {default as UserDetails} from require('./user/userDetails.model')
 export {default as userPassword} from require('./user/userPassword.model')
+
+// export extra details 
+export {default as CountryDetails} from require('./details/contryDetails.model')
+export {default as CountryList} from require('./details/countryList.model')
