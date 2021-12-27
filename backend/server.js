@@ -18,7 +18,7 @@ require("./auth/database/mongoDB");
 app.use("/", express.static(path.join(__dirname, "static")));
 
 // seting api routs here
-// app.use("/api", require("./api"));
+app.use("/api", require("./api"));
 
 // defining port number
 const PORT = process.env.PORT || 5000;
