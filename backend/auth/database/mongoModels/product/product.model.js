@@ -6,6 +6,8 @@ const data = {
   productDescription: { type: String, required: true, trim: true },
   price: { type: Number, required: true, trim: true },
   like: { type: Number, required: true, trim: true },
+  category: { type: String, required: true },
+  companyId: { type: mongoose.Types.ObjectId, required: true },
   rating: {
     rate: { type: Number, required: true, trim: true },
     count: { type: Number, required: true, trim: true },
