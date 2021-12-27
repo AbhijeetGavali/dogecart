@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Set new password</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .App {
+        font-family: sans-serif;
+        text-align: center;
+        background-color: antiquewhite;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .resetPasswordForm {
+        min-width: 300px;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        box-shadow: 2px 2px 10px black;
+        padding: 10px;
+        border-radius: 0.4em;
+      }
+
+      .resetPasswordForm label {
+        margin: 0.7em auto 0.7em auto;
+      }
+
+      .resetPasswordForm input {
+        padding: 0.2em 0.7em;
+        font-size: 1em;
+        outline: none;
+        border: 1px solid black;
+        border-radius: 0.4em;
+      }
+
+      .resetPasswordForm button {
+        background-color: #3a8df4;
+        padding: 0.5em 0.7em;
+        width: max-content;
+        align-self: center;
+        margin: 1em auto;
+        border-radius: 1em;
+      }
+
+      .resetPasswordForm button:hover {
+        box-shadow: 2px 2px 10px solid black;
+      }
+
+      #status {
+        border: none;
+        outline: none;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="App">
+      <form class="resetPasswordForm" id="signup">
+        <label>
+          <h3>Hello user_email</h3>
+        </label>
+        <input id="status" value="" disabled />
+        <label htmlFor="forgetMail">
+          <input id="newPassword" type="password" placeholder="New password" />
+        </label>
+        <label htmlFor="forgetMail">
+          <input
+            id="confirmNewPassword"
+            type="password"
+            placeholder="Confirm New Password"
+          />
+        </label>
+        <button type="submit" class="btn">Reset Password</button>
+      </form>
+    </div>
+    <script>
+      function stringHasTheWhiteSpaceOrNot(value) {
+        return value.indexOf(" ") >= 0;
+      }
+
+      const form = document.getElementById("signup");
+      form.addEventListener("submit", (event) => {
+        // stop form submission
+        event.preventDefault();
+
+        var newPassword = form.elements["newPassword"].value;
+        var confirmNewPassword = form.elements["confirmNewPassword"].value;
+
+        if (
+          !stringHasTheWhiteSpaceOrNot(newPassword) &&
+          !stringHasTheWhiteSpaceOrNot(confirmNewPassword)
+        ) {
+          if (newPassword === confirmNewPassword) {
+            if (newPassword != "") {
+              form.elements["status"].value = "";
+              var post_url = new URL(window.location.href);
+              var data = { new_password: newPassword };
+              fetch(post_url, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+              })
+                .then((res) => {
+                  console.log("Request complete! response:", res);
+                })
+                .catch((err) => {
+                  console.log("Error in sending password", err);
+                });
+            } else {
+              form.elements["status"].value = "Password can't be blank.";
+            }
+          } else {
+            form.elements["status"].value = "Please enter same password.";
+          }
+        } else {
+          form.elements["status"].value = "Do not use spaces.";
+        }
+      });
+    </script>
+  </body>
+</html>
