@@ -7,7 +7,6 @@ var jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const JWT_SECRET = process.env.JWT_SECRET;
 
-var fetchuser = require("../middleware/fetchuser");
 const { User } = require("../../auth/database/mongoModels");
 
 router.post("/", async (req, res) => {});

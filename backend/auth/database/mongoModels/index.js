@@ -14,10 +14,10 @@ export {default as StoreSubscribers} from require('./store/storeSubscriber.model
 
 // export schema for user type datas
 export {default as User} from require('./user/user.model')
-export {default as UsetBucketList} from require('./user/userBucketList.model')
-export {default as UserCartMpa} from require('./user/userCart.model')
+export {default as UserBucketList} from require('./user/userBucketList.model')
+export {default as UserCart} from require('./user/userCart.model')
 export {default as UserDetails} from require('./user/userDetails.model')
-export {default as userPassword} from require('./user/userPassword.model')
+export {default as UserPassword} from require('./user/userPassword.model')
 
 // export extra details 
 export {default as CountryDetails} from require('./details/contryDetails.model')

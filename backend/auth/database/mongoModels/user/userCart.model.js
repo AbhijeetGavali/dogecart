@@ -4,8 +4,8 @@ const data = {
   userId: { type: mongoose.Types.ObjectId, required: true },
   cart: [
     {
-      productId: { type: mongoose.Types.ObjectId, required: true },
-      count: { type: Number, required: true },
+      productId: { type: mongoose.Types.ObjectId },
+      count: { type: Number },
     },
   ],
 };
