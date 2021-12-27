@@ -1,24 +1,21 @@
-
 // exporting schema for product type data
-export {default as Product} from require('./product/product.model') 
-export {default as ProductCategory} from require('./product/productCategory.model')
-export {default as ProductCampany} from require('./product/productCompany.model')
-export {default as ProductRating} from require('./product/productRating.model')
-export {default as ProductLike} from require('./product/productLike.model')
+module.exports = Product = require("./product/product.model");
+module.path = require("./product/productRating.model");
+module.path = require("./product/productsLike.model");
 
 // export schema for store type data
-export {default as Store} from require('./store/store.model')
-export {default as StorePassword} from require('./store/storePassword.model')
-export {default as StorePromotion} from require('./store/storePromo.model')
-export {default as StoreSubscribers} from require('./store/storeSubscriber.model')
+module.path = require("./store/store.model");
+module.path = require("./store/storePassword.model");
+module.path = require("./store/storePromo.model");
+module.path = require("./store/storeSubscriber.model");
 
 // export schema for user type datas
-export {default as User} from require('./user/user.model')
-export {default as UserBucketList} from require('./user/userBucketList.model')
-export {default as UserCart} from require('./user/userCart.model')
-export {default as UserDetails} from require('./user/userDetails.model')
-export {default as UserPassword} from require('./user/userPassword.model')
+module.exports = User = require("./user/user.model");
+module.path = require("./user/userBucketList.model");
+module.path = require("./user/userCart.model");
+module.path = require("./user/userDetails.model");
+module.path = require("./user/userPassword.model");
 
-// export extra details 
-export {default as CountryDetails} from require('./details/contryDetails.model')
-export {default as CountryList} from require('./details/countryList.model')
+// export extra details
+module.path = require("./details/contryDetails.model");
+module.path = require("./details/countryList.model");

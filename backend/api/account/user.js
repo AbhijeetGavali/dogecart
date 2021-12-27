@@ -10,22 +10,28 @@ const bcrypt = require("bcryptjs");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 var fetchuser = require("../middleware/fetchuser");
-const {
-  User,
-  UserPassword,
-  UserDetails,
-  UserCart,
-  UserBucketList,
-} = require("../../auth/database/mongoModels");
+
+const User = require("../../auth/database/mongoModels/user/user.model");
+const UserPassword = require("../../auth/database/mongoModels/user/userPassword.model");
+const UserDetails = require("../../auth/database/mongoModels/user/userDetails.model");
+const UserCart = require("../../auth/database/mongoModels/user/userCart.model");
+const UserBucketList = require("../../auth/database/mongoModels/user/userBucketList.model");
 
 router.get("/", fetchuser, async (req, res) => {
   try {
     let userId = req.user.id;
     const user = await User.findById(userId);
-    res.send(user);
+    let data = user
+      ? {
+          first_Name: user.userName.userFirstName,
+          last_Name: user.userName.userFirstName,
+          email: user.userEmail,
+        }
+      : "Not Found";
+    return res.send(data);
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Internal Server Error");
+    return res.status(500).send("Internal Server Error");
   }
 });
 
@@ -105,10 +111,10 @@ router.post(
       const authtoken = jwt.sign(data, JWT_SECRET);
 
       // send token to clientside
-      res.status(200).json({ authtoken });
+      return res.status(200).json({ authtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal Server Error");
+      return res.status(500).send("Internal Server Error");
     }
   }
 );
@@ -120,9 +126,6 @@ router.put(
     body("first_Name", "Enter a valid name").isLength({ min: 3 }),
     body("last_Name", "Enter a valid name").isLength({ min: 3 }),
     body("email", "Enter a valid email").isEmail(),
-    body("password", "Password must be atleast 8 characters").isLength({
-      min: 8,
-    }),
   ],
   fetchuser,
   async (req, res) => {
@@ -135,20 +138,17 @@ router.put(
     // If there are no error in req, perform next
     try {
       let userId = req.user.id;
-      const user = await User.findOneAndUpdate(
-        { userId },
-        {
-          userName: {
-            userFirstName: req.body.first_Name,
-            userLastName: req.body.last_Name,
-          },
-          userEmail: req.body.email,
-        }
-      );
-      res.send(user);
+      let done = await User.findByIdAndUpdate(userId, {
+        userName: {
+          userFirstName: req.body.first_Name,
+          userLastName: req.body.last_Name,
+        },
+        userEmail: req.body.email,
+      });
+      return done ? res.send("Done") : res.send("Not FOund");
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal Server Error");
+      return res.status(500).send("Internal Server Error");
     }
   }
 );
@@ -166,13 +166,18 @@ router.delete(
     }
 
     // If there are no error in req, perform next
-
     try {
       let userId = req.user.id;
       const { password } = req.body;
 
       const userPass = await UserPassword.findOne({ userId });
-      const passwordCompare = await bcrypt.compare(password, userPass.password);
+      if (userPass === null) {
+        return res.status(400).send("pass null");
+      }
+      const passwordCompare = await bcrypt.compare(
+        password,
+        userPass.userPassword
+      );
 
       if (!passwordCompare) {
         return res.status(400).json({
@@ -180,14 +185,14 @@ router.delete(
         });
       }
       await User.findByIdAndDelete(userId);
-      await UserPassword.findByIdAndDelete(userPass.id);
+      await UserPassword.findByIdAndDelete(userPass._id);
       await UserDetails.findOneAndDelete({ userId });
       await UserCart.findOneAndDelete({ userId });
       await UserBucketList.findOneAndDelete({ userId });
       return res.status(200).send("Done");
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal Server Error");
+      return res.status(500).send("Internal Server Error");
     }
   }
 );
