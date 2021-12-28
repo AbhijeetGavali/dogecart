@@ -251,7 +251,7 @@ let data = [
   { countryName: "Zimbabwe", awailable: false },
 ];
 
-const Country = require("./auth/database/mongoModels/details/countryList.model");
+const Country = require("../../auth/database/mongoModels/details/countryList.model");
 
 module.exports = async function addCountry(req, res) {
   Country.insertMany(data)
