@@ -90,7 +90,7 @@ router.post(
         userCity: "",
         userState: "",
         userCountry: "",
-        userPinCode: "",
+        userPinCode: 0,
         userContactNumber: -1,
       });
       await UserCart.create({
