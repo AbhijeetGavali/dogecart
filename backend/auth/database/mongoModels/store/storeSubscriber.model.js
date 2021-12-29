@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const data = {
-  storeID: { type: mongoose.Types.ObjectId, required: true },
-  userList: [{ type: mongoose.Types.ObjectId, required: true }],
+  storeId: { type: mongoose.Types.ObjectId, required: true },
+  userList: [{ type: String }],
 };
 
 const subscribersSchema = new mongoose.Schema(data);
