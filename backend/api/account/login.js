@@ -50,6 +50,8 @@ router.post(
         });
       }
 
+      // to implement user product cart mearging
+
       const data = {
         user: {
           id: user.id,
