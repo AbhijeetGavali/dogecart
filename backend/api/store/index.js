@@ -7,7 +7,7 @@ router.use("/", require("./store"));
 router.use("/login", fetchuser, require("./login"));
 router.use("/reset-password", require("./resetPassword"));
 router.use("/subscription", require("./subscription"));
-// router.use("/promo", fetchuser, fetchStore, require("./promo"));
+// router.use("/:promo", fetchuser, fetchStore, require("./promo"));
 
 // exporting the module
 module.exports = router;

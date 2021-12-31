@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const data = {
-  storeID: { type: mongoose.Types.ObjectId, required: true },
-  productId: { type: mongoose.Types.ObjectId, required: true },
+  storeId: { type: mongoose.Types.ObjectId, required: true },
+  productList: [{ type: mongoose.Types.ObjectId, required: true }],
   offer: {
     coupan: { type: String, required: true },
     value: { type: Number, required: true },
