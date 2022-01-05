@@ -1,3 +1,4 @@
+import Searchbar from "../components/searchbar/Searchbar";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -5,7 +6,7 @@ export default function Home() {
   console.log("process.env");
   return (
     <div className={styles.container}>
-      HELLO WORLD FOR MONGODB PROJECT TO SUBMIT ON HACKTHON
+      <Searchbar />
     </div>
   );
 }
