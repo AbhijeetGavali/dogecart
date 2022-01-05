@@ -6,7 +6,7 @@ const mongoDB_User = process.env.MONGODB_USER;
 
 // mongo client
 const mongoose = require("mongoose");
-const uri = `mongodb+srv://${mongoDB_User}:${mongoDB_Password}@cluster1.chonj.mongodb.net/dogecart?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${mongoDB_User}:${mongoDB_Password}@dogecartcluster.chonj.mongodb.net/dogecartDB?retryWrites=true&w=majority`;
 
 // setting up mongooes for global usage
 mongoose.Promise = global.Promise;

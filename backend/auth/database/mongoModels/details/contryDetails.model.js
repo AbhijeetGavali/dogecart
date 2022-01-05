@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 
 const data = {
-  countryId: { type: mongoose.Types.ObjectId, required: true },
+  countryId: { type: String, required: true },
+  awailable: { type: Boolean, required: true },
   countryName: { type: String, required: true },
-  countryCode: { type: String, required: true },
-  stateList: [{ type: String, required: true }],
+  countryCode: { type: String },
+  stateList: [{ type: String }],
 };
 
 const countryDetailSchema = new mongoose.Schema(data);

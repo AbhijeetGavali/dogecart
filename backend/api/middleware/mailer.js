@@ -19,7 +19,7 @@ async function mailer(props) {
 
   // set all required contents to send via mail
   const mailOptions = {
-    from: "mr.abhijeetgavali@gmail.com",
+    from: "dogecart@outlook.com",
     to: MAIL_TO,
     subject: MAILER_SUBJECT,
     html: MAILER_TEMPLATE,
@@ -35,4 +35,14 @@ async function mailer(props) {
     }
   });
 }
+
+// FOR TESTING MAIL'S
+
+// var data = {
+//   MAIL_TO: "mr.abhijeetgavali@gmail.com",
+//   MAILER_SUBJECT: "hello test",
+//   MAILER_TEMPLATE: "hello world",
+// };
+// mailer(data);
+
 module.exports = mailer;
