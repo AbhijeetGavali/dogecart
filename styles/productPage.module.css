@@ -1,0 +1,38 @@
+.productContainer {
+}
+
+.productUrl {
+  font-size: 12px;
+  padding: 8px 15px;
+  letter-spacing: 0.5px;
+}
+
+.productUrl a {
+  padding: 0px 3px;
+}
+
+.productUrl a:hover {
+  color: var(--blue);
+}
+
+.productDetailsPage {
+  padding: 10px;
+}
+.categoryOuterContainer {
+  margin-top: 3em;
+}
+.categoryOuterContainer h2 {
+  font-size: 2em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.categoryContainer {
+  margin-top: 0.8em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 30px;
+  overflow-x: scroll;
+  width: 100%;
+}

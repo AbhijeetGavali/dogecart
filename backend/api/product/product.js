@@ -1,6 +1,8 @@
 // importing router to set api paths
 const router = require("express").Router();
 const Product = require("../../auth/database/mongoModels/product/product.model");
+const Store = require("../../auth/database/mongoModels/store/store.model");
+const User = require("../../auth/database/mongoModels/user/user.model");
 
 // get => /api/product/:category get some details of all product with sub category
 router.get("/:category", async (req, res) => {
@@ -9,20 +11,37 @@ router.get("/:category", async (req, res) => {
 
     const product = await Product.find(
       { category },
-      "productUrl title price manufacturar rating stock"
+      "productUrl title description price manufacturar rating"
     );
 
     let data =
       product.length > 0
-        ? product.map((product) => ({
-            id: product.id,
-            productUrl: product.productUrl[0],
-            title: product.productTitle,
-            price: product.price,
-            manufacturar: product.manufacturar,
-            rating: product.rating,
-            stock: product.stock,
-          }))
+        ? product.map((product) => {
+            let store = Store.find(
+              { _id: product.manufacturar },
+              "name description logo"
+            ).then((data) => data);
+            return {
+              id: product.id,
+              productUrl: product.productUrl[0],
+              title: product.productTitle,
+              price: product.price,
+              manufacturar: {
+                name: store.name,
+                description: store.description,
+                logo: store.logo,
+              },
+              review: product.review.map((review) => {
+                return {
+                  ...review,
+                  name: User.findById(review.userId, "name").then(
+                    (name) => name
+                  ),
+                };
+              }),
+              description: product.description,
+            };
+          })
         : "not-found";
     return res.json({ data });
   } catch (error) {
@@ -39,20 +58,37 @@ router.get("/:category/:subcategory", async (req, res) => {
 
     const product = await Product.find(
       { category, subCategory },
-      "productUrl title price manufacturar rating stock"
+      "productUrl title description price manufacturar rating"
     );
 
     let data =
       product.length > 0
-        ? product.map((product) => ({
-            id: product.id,
-            productUrl: product.productUrl[0],
-            title: product.productTitle,
-            price: product.price,
-            manufacturar: product.manufacturar,
-            rating: product.rating,
-            stock: product.stock,
-          }))
+        ? product.map((product) => {
+            let store = Store.find(
+              { _id: product.manufacturar },
+              "name description logo"
+            ).then((data) => data);
+            return {
+              id: product.id,
+              productUrl: product.productUrl[0],
+              title: product.productTitle,
+              price: product.price,
+              manufacturar: {
+                name: store.name,
+                description: store.description,
+                logo: store.logo,
+              },
+              review: product.review.map((review) => {
+                return {
+                  ...review,
+                  name: User.findById(review.userId, "name").then(
+                    (name) => name
+                  ),
+                };
+              }),
+              description: product.description,
+            };
+          })
         : "not-found";
     return res.json({ data });
   } catch (error) {
@@ -66,7 +102,27 @@ router.get("/:category/:subcategory/:productId", async (req, res) => {
   try {
     let productId = req.params.productId;
     const product = await Product.findById(productId, "-tax -promocode -order");
-    let data = product ? { ...product } : "not-found";
+    const store = await Store.find(
+      { _id: product.manufacturar },
+      "name description logo"
+    );
+
+    let data = product
+      ? {
+          ...product,
+          manufacturar: {
+            name: store.name,
+            description: store.description,
+            logo: store.logo,
+          },
+          review: product.review.map((review) => {
+            return {
+              ...review,
+              name: User.findById(review.userId, "name").then((name) => name),
+            };
+          }),
+        }
+      : "not-found";
     return res.json({ data });
   } catch (error) {
     console.error(error.message);

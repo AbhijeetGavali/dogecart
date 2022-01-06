@@ -20,10 +20,10 @@ export default function Searchbar() {
             className={`${styles.searchInputBar}`}
           />
           <Image
-            src={"/assets/img/logo.png"}
+            src={"/assets/img/searchIcon.png"}
             alt="logo of doge cart"
-            width="30px"
-            height="30px"
+            width="25px"
+            height="25px"
             className={`${styles.img}`}
           />
         </div>

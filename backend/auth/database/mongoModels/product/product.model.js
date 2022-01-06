@@ -9,20 +9,19 @@ const data = {
   category: { type: String, required: true },
   subCategory: { type: String },
   manufacturar: { type: mongoose.Types.ObjectId, required: true },
-  rating: {
-    rate: { type: Number, required: true, trim: true },
-    count: { type: Number, required: true, trim: true },
-  },
   review: [
     {
-      review: { type: Number, required: true, trim: true },
+      rate: { type: Number, required: true, trim: true },
+      userId: { type: mongoose.Types.ObjectId, required: true, trim: true },
       comment: { type: Number, required: true, trim: true },
     },
   ],
   colors: [{ type: String }],
+  sizes: [{ type: String }],
   stock: { type: Number, required: true },
   model: { type: Number },
   promocode: { type: Array },
+  storeDiscount: { type: Number },
   measurement: {
     size: { type: String },
     wait: { type: Number },

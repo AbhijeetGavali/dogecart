@@ -1,0 +1,10 @@
+.questionContainer {
+  margin-top: 1em;
+}
+.question {
+  padding: 0.2em 0;
+  font-size: 1em;
+}
+.answer {
+  font-size: 1em;
+}
