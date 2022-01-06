@@ -33,18 +33,19 @@ const data = {
   mobile: { type: Number },
   cart: { type: Array },
   wishlist: { type: Array },
-  likedProducts: { type: Array },
-  order: {
-    id: { type: String },
-    product: { type: Array },
-    totalAmmount: { type: Number },
-    promoCode: { type: String },
-    date: { type: String },
-    tracker: { type: Object },
-  },
+  order: [
+    {
+      id: { type: String },
+      product: { type: Array },
+      totalAmmount: { type: Number },
+      promoCode: { type: String },
+      date: { type: String },
+      tracker: { type: Object },
+    },
+  ],
   totalSpend: { type: Number },
   ratedProduct: { type: Array },
-  freienRefferal: { type: Array },
+  refferal: { type: Array },
 };
 
 const userSchema = new mongoose.Schema(data);

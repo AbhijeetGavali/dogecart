@@ -1,75 +1,78 @@
 // importing router to set api paths
 const router = require("express").Router();
 const Product = require("../../auth/database/mongoModels/product/product.model");
-const ProductLikes = require("../../auth/database/mongoModels/product/productsLike.model");
 
-var fetchuser = require("../middleware/fetchuser");
-
-router.get("/:id", async (req, res) => {
+// get => /api/product/:category get some details of all product with sub category
+router.get("/:category", async (req, res) => {
   try {
-    let productId = req.params.id;
-    const product = await Product.findById(productId);
-    if (!!product) {
-      let data = product
-        ? {
+    let category = req.params.category;
+
+    const product = await Product.find(
+      { category },
+      "productUrl title price manufacturar rating stock"
+    );
+
+    let data =
+      product.length > 0
+        ? product.map((product) => ({
             id: product.id,
-            productUrls: product.productUrl.map((url) => url),
+            productUrl: product.productUrl[0],
             title: product.productTitle,
-            description: product.productDescription,
             price: product.price,
-            like: product.like,
-            category: product.category,
-            companyId: product.companyId,
-            rateValue: product.rating.rate,
-            rateCount: product.rating.count,
-            availableColors: product.colors
-              ? product.colors.map((col) => col)
-              : [""],
-          }
-        : "Not Found";
-      return res.json({ data });
-    } else {
-      return res.status(401).send("product not found");
-    }
+            manufacturar: product.manufacturar,
+            rating: product.rating,
+            stock: product.stock,
+          }))
+        : "not-found";
+    return res.json({ data });
   } catch (error) {
     console.error(error.message);
     return res.status(500).send("Internal Server Error");
   }
 });
 
-// router.post(
-//   "like/:id",
-//   fetchuser,
-//   [body("like", "Like should be +1 or -1").isNumeric()],
-//   async (req, res) => {
-//     var userId = req.user.id;
-//     let productId = req.params.id;
+// get => /api/product/:category/:subcategory get some details of all product with sub category
+router.get("/:category/:subcategory", async (req, res) => {
+  try {
+    let category = req.params.category;
+    let subCategory = req.params.subcategory;
 
-//     let productLiked = ProductLikes.findOne({ userId });
+    const product = await Product.find(
+      { category, subCategory },
+      "productUrl title price manufacturar rating stock"
+    );
 
-//     if (!!productLiked) {
-//       const product = await Product.findById(productId);
-//       const productLiked = await Product.findByIdAndUpdate(productId, {
-//         like: product.like + 1,
-//       });
-//       var liked = ProductLikes.create({
-//         productId,
-//         userId,
-//       });
-//       return res.status(200).json({ like: "liked", liked });
-//     } else {
-//       const product = await Product.findById(productId);
-//       const productLiked = await Product.findByIdAndUpdate(productId, {
-//         like: product.like - 1,
-//       });
-//       var liked = ProductLikes.findOneAndDelete({
-//         productId,
-//         userId,
-//       });
-//       return res.status(200).json({ like: "unliked", liked });
-//     }
-//   }
-// );
+    let data =
+      product.length > 0
+        ? product.map((product) => ({
+            id: product.id,
+            productUrl: product.productUrl[0],
+            title: product.productTitle,
+            price: product.price,
+            manufacturar: product.manufacturar,
+            rating: product.rating,
+            stock: product.stock,
+          }))
+        : "not-found";
+    return res.json({ data });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).send("Internal Server Error");
+  }
+});
+
+// get => /api/product/:category/:subcategory/:productId get all details of single product
+router.get("/:category/:subcategory/:productId", async (req, res) => {
+  try {
+    let productId = req.params.productId;
+    const product = await Product.findById(productId, "-tax -promocode -order");
+    let data = product ? { ...product } : "not-found";
+    return res.json(data);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 
 // exporting the module
 module.exports = router;

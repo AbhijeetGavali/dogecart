@@ -6,7 +6,6 @@ const data = {
   description: { type: String, required: true, trim: true },
   price: { type: Number, required: true, trim: true },
   tax: { type: Number },
-  like: { type: Number, trim: true },
   category: { type: String, required: true },
   subCategory: { type: String },
   manufacturar: { type: mongoose.Types.ObjectId, required: true },
@@ -14,6 +13,12 @@ const data = {
     rate: { type: Number, required: true, trim: true },
     count: { type: Number, required: true, trim: true },
   },
+  review: [
+    {
+      review: { type: Number, required: true, trim: true },
+      comment: { type: Number, required: true, trim: true },
+    },
+  ],
   colors: [{ type: String }],
   stock: { type: Number, required: true },
   model: { type: Number },

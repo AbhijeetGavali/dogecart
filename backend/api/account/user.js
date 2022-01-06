@@ -12,15 +12,11 @@ const JWT_SECRET = process.env.JWT_SECRET;
 var fetchuser = require("../middleware/fetchuser");
 
 const User = require("../../auth/database/mongoModels/user/user.model");
-const UserPassword = require("../../auth/database/mongoModels/user/userPassword.model");
-const UserDetails = require("../../auth/database/mongoModels/user/userDetails.model");
-const UserCart = require("../../auth/database/mongoModels/user/userCart.model");
-const UserBucketList = require("../../auth/database/mongoModels/user/userBucketList.model");
 
 router.get("/", fetchuser, async (req, res) => {
   try {
     let userId = req.user.id;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId, "name email");
     let data = user
       ? {
           first_Name: user.userName.userFirstName,
