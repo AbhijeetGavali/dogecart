@@ -67,7 +67,7 @@ router.get("/:category/:subcategory/:productId", async (req, res) => {
     let productId = req.params.productId;
     const product = await Product.findById(productId, "-tax -promocode -order");
     let data = product ? { ...product } : "not-found";
-    return res.json(data);
+    return res.json({ data });
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({ message: "Internal Server Error" });

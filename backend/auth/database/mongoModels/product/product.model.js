@@ -31,7 +31,7 @@ const data = {
   orders: { type: Number },
   refundAble: { type: Boolean, required: true },
   digital: { type: Boolean, required: true },
-  downloadLink: { type: File },
+  downloadLink: { type: String },
   faq: [{ que: { type: String }, ans: { type: String } }],
 };
 
