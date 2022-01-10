@@ -28,8 +28,7 @@
   margin-top: 0.8em;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 30px;
-  overflow-x: scroll;
   width: 100%;
 }

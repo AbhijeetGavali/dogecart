@@ -11,7 +11,7 @@ router.get("/:category", async (req, res) => {
 
     const product = await Product.find(
       { category },
-      "productUrl title description price manufacturar rating"
+      "productUrl title description price manufacturar rating category subCategory"
     );
 
     let data =
@@ -31,6 +31,8 @@ router.get("/:category", async (req, res) => {
                 description: store.description,
                 logo: store.logo,
               },
+              category: product.category,
+              subCategory: product.subCategory,
               review: product.review.map((review) => {
                 return {
                   ...review,
@@ -58,7 +60,7 @@ router.get("/:category/:subcategory", async (req, res) => {
 
     const product = await Product.find(
       { category, subCategory },
-      "productUrl title description price manufacturar rating"
+      "productUrl title description price manufacturar rating category subCategory"
     );
 
     let data =
@@ -78,6 +80,8 @@ router.get("/:category/:subcategory", async (req, res) => {
                 description: store.description,
                 logo: store.logo,
               },
+              category: product.category,
+              subCategory: product.subCategory,
               review: product.review.map((review) => {
                 return {
                   ...review,
@@ -111,6 +115,7 @@ router.get("/:category/:subcategory/:productId", async (req, res) => {
       ? {
           ...product,
           manufacturar: {
+            id: store.id,
             name: store.name,
             description: store.description,
             logo: store.logo,

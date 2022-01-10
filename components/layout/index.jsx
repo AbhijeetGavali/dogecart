@@ -9,6 +9,7 @@ export default function Layout({ children }) {
     <>
       <Head>
         <title>Doge Cart - cart for everyone</title>
+        <link rel="icon" type="image/webp" href="/assets/img/logo.webp" />
       </Head>
       <div className="app">
         <Header />

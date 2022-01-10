@@ -29,7 +29,6 @@ const data = {
   ],
   orders: [
     {
-      date: { type: Date },
       cart: { type: Array },
       payment: { type: Boolean },
       promocod: { type: String },

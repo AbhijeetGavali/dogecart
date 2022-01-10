@@ -12,24 +12,19 @@
   color: var(--blue);
 }
 
-.productDetailsPage {
-  padding: 10px;
+.sortOption {
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #ebebeb;
+  padding: 0.5em 1em;
 }
-.categoryOuterContainer {
-  margin-top: 3em;
-}
-.categoryOuterContainer h2 {
-  font-size: 2em;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
+
 .categoryContainer {
   margin-top: 0.8em;
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
   gap: 30px;
-  overflow-x: scroll;
   width: 100%;
 }

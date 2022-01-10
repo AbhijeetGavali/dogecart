@@ -43,7 +43,7 @@ export default function Product({ product }) {
       </section>
       <section className={styles.productDetailsContainer}>
         <div className={styles.productStoreName}>
-          <Link href="/">
+          <Link href={`/store/${product.manufacturar.id}`}>
             <a>
               {product.manufacturar.name}
               <span className={styles.productStoreHover}>
