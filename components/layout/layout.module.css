@@ -45,6 +45,7 @@
   height: 100vh;
   padding: 70px 30px 30px;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 /* css code for copyright sec footer  */

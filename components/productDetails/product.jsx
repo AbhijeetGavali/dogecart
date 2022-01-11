@@ -1,12 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Faq from "../faq/Faq";
 import Batch from "./Batch";
 import styles from "./product.module.css";
 export default function Product({ product }) {
   const [mainProductUrl, setMainProductUrl] = useState(product.productUrl[0]);
   const [reviewTodesplay, setReviewTodesplay] = useState(3);
+  useEffect(() => {
+    setMainProductUrl(product.productUrl[0]);
+  }, [product]);
   let rate = 0;
   let rateArray = [1, 2, 3, 4, 5];
   product.review.map((review) => {

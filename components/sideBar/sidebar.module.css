@@ -1,0 +1,92 @@
+.homeSideBar {
+  width: 100%;
+  height: 0%;
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  z-index: 100;
+}
+
+.homeSideBarToggleButton {
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  right: -20px;
+  top: 0;
+  background-color: #fff;
+  background-image: url("/assets/img/right_arrow.webp");
+  background-position: center center;
+  border-radius: 25px;
+  box-shadow: 1px 4px 10px rgba(8, 29, 34, 0.507);
+  z-index: 1;
+  transition: all 900ms ease-in-out;
+  transform: rotate(180deg);
+}
+
+.homeSideBarToggleMenu {
+  width: 300px;
+  height: 500px;
+  position: absolute;
+  right: -300px;
+  top: -10px;
+  border-radius: 8px;
+  transition: all 900ms ease-in-out;
+}
+
+.homeSideBarToggledButton {
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  right: 280px;
+  top: 0;
+  background-color: #fff;
+  background-image: url("/assets/img/right_arrow.webp");
+  background-position: center center;
+  border-radius: 25px;
+  box-shadow: 1px 4px 10px rgba(8, 29, 34, 0.507);
+  z-index: 1;
+  transition: all 900ms ease-in-out;
+}
+
+.homeSideBarToggledMenu {
+  width: 300px;
+  height: 500px;
+  position: absolute;
+  right: 0px;
+  top: -10px;
+  background: #383838;
+  border-radius: 10px;
+  border-radius: 8px;
+  transition: all 900ms ease-in-out;
+}
+
+.homeSideBarToggleMenu * {
+  background: transparent;
+  opacity: 0;
+}
+
+.homeSideBarToggledMenu * {
+  background: transparent;
+  opacity: 1;
+}
+
+.categoryContainerToggleBar {
+  padding: 60px 15px 10px;
+}
+
+.categoryContainerToggleBar ul {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 15px;
+}
+
+.categoryContainerToggleBar h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.categoryContainerToggleBar ul li {
+  list-style-type: none;
+  padding-top: 3px;
+}

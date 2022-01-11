@@ -7,13 +7,13 @@ export default function SmProduct({ product }) {
     rate = rate + review.rate;
   });
   rate = rate / product.review.length;
-  let width = rate + 1;
+  let width = rate;
   return (
     <div>
       <div className={styles.smallProductOuterContainer}>
-        <Image src={product.productUrl[0]} alt="productImg" layout="fill" />
+        <Image src={product.productUrl} alt="productImg" layout="fill" />
         <Link
-          href={`/${product.category}/${product.subCategory}/${product.id}`}
+          href={`/products/${product.category}/${product.subCategory}/${product.id}`}
         >
           <a>
             <div className={styles.hoverDetailsOfProduct}>
@@ -32,7 +32,7 @@ export default function SmProduct({ product }) {
               <span className={styles.productStoreHover}>
                 <div className={styles.productStoreLogo}>
                   <Image
-                    src={product.manufacturar.logo}
+                    src={product.manufacturar.logo || "/"}
                     layout="fill"
                     alt="store logo"
                   />
@@ -40,7 +40,7 @@ export default function SmProduct({ product }) {
                 <div className={styles.productStoreDetails}>
                   {" "}
                   <p>{product.manufacturar.name}</p>
-                  <p>{product.manufacturar.description}</p>
+                  <p>{product.manufacturar.description.slice(0, 100)}...</p>
                 </div>
               </span>{" "}
             </a>

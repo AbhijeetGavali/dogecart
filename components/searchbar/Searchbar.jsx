@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/Home.module.css";
 
 export default function Searchbar() {
+  // define IP of backend to get data
+  const IP2 = "http://localhost:5000";
+
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [activeId, setActiveId] = useState(-1);
@@ -15,77 +18,37 @@ export default function Searchbar() {
   useEffect(() => {
     var backSearchQuery = searchText;
     if (searchText.length > 3 && searchText.length < 25) {
-      var result = setSuggestionsWithQuery(searchText);
-      if (searchText.length < 15) {
-        setSuggestions(result.data);
-      } else {
-        setSuggestions([]);
-      }
-      if (result.match) {
-        backSearchQuery = result.data[0].name;
-        setDisplayBackQuery(true);
-        setDisplayInputQuery(true);
-        setActiveId(-1);
-      }
+      async function func() {
+        const result = await fetch(
+          `${IP2}/api/product/autocomplete/${searchText}`
+        )
+          .then((result) => result.json())
+          .then((result) => {
+            if (searchText.length < 15) {
+              setSuggestions(result.data);
+            } else {
+              setSuggestions([]);
+            }
+            if (result.match) {
+              backSearchQuery = result.data[0].title;
+              setDisplayBackQuery(true);
+              setDisplayInputQuery(true);
+              setActiveId(-1);
+            }
 
-      result.data.forEach((suggestion, idx) => {
-        if (idx === activeId) {
-          backSearchQuery = suggestion.name;
-          setDisplayBackQuery(true);
-          setDisplayInputQuery(false);
-        }
-      });
+            result.data.forEach((suggestion, idx) => {
+              if (idx === activeId) {
+                backSearchQuery = suggestion.title;
+                setDisplayBackQuery(true);
+                setDisplayInputQuery(false);
+              }
+            });
+          });
+        setBackSearchQuery(backSearchQuery);
+      }
+      func();
     }
-    setBackSearchQuery(backSearchQuery);
   }, [searchText, activeId]);
-
-  const setSuggestionsWithQuery = (queryTest) => {
-    const queryResult = [
-      {
-        id: 0,
-        name: "helloworlagfeunjkdisd",
-      },
-      {
-        id: "2",
-        name: "helloworldisd",
-      },
-      {
-        id: "3",
-        name: "helloworldivenlakcm.vbelnakdojfesd",
-      },
-      {
-        id: "4",
-        name: "helloworldisd",
-      },
-      {
-        id: "5",
-        name: "hellowor  ldisd a  af a af  eafc aef feafdfgbrf va",
-      },
-      {
-        id: "6",
-        name: "helloworlagfeunjkdisd",
-      },
-      {
-        id: "7",
-        name: "helloworldisd",
-      },
-      {
-        id: "8",
-        name: "helloworldivenlakcm.vbelnakdojfesd",
-      },
-      {
-        id: "9",
-        name: "helloworldisd",
-      },
-      {
-        id: "10",
-        name: "hellowor  ldisd a  af a af  eafc aef feafdfgbrf va",
-      },
-    ];
-
-    console.log("searching", queryTest);
-    return { data: queryResult, match: false };
-  };
 
   const handleKeyDown = (e) => {
     if (suggestions.length > 1) {
@@ -110,17 +73,20 @@ export default function Searchbar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(setSuggestionsWithQuery(searchText));
     router.push({
       pathname: `/products/search/${searchText}`,
     });
+    console.log("form");
     setSearchText("");
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={`${styles.container}`}>
+      <form
+        onSubmit={handleSubmit}
+        id="searchForm"
+        className={`${styles.container}`}
+      >
         <div className={`${styles.searchBar}  bg_gradient`}>
           <Image
             src={"/assets/img/logo.webp"}
@@ -134,9 +100,12 @@ export default function Searchbar() {
             type="text"
             placeholder="Search for the product !"
             name="search-product"
-            value={searchText}
+            value={searchText.toLowerCase()}
             onChange={(e) => {
-              setSearchText(e.currentTarget.value);
+              setSearchText(e.currentTarget.value.toLowerCase());
+            }}
+            onEnter={(e) => {
+              console.log("form enter");
             }}
             style={{ opacity: displayInputQuery ? "1" : "0" }}
             onKeyDown={handleKeyDown}
@@ -147,7 +116,7 @@ export default function Searchbar() {
             <input
               type="text"
               name="search-product-back-query"
-              value={backSearchQuery}
+              value={backSearchQuery.toLowerCase()}
               onKeyDown={handleKeyDown}
               disabled={true}
               className={`${styles.backSearchQuery}`}
@@ -169,14 +138,17 @@ export default function Searchbar() {
                 activeId === idx ? styles.activeQuery : " "
               }`}
               onClick={(e) => {
-                console.log(suggestion.id);
+                router.push({
+                  pathname: `/products/${suggestion.category}/${suggestion.subCategory}/${suggestion._id}`,
+                });
               }}
               key={idx}
             >
-              {suggestion.name}
+              {suggestion.title.toLowerCase()}
             </li>
           ))}
         </ul>
+        <input style={{ display: "none" }} type="submit" />
       </form>
     </>
   );
