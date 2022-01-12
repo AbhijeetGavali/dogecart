@@ -12,8 +12,8 @@ const data = {
   review: [
     {
       rate: { type: Number, required: true, trim: true },
-      userId: { type: mongoose.Types.ObjectId, required: true, trim: true },
-      comment: { type: Number, required: true, trim: true },
+      name: { type: String, required: true, trim: true },
+      comment: { type: String, required: true, trim: true },
     },
   ],
   colors: [{ type: String }],
