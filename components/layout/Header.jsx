@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <div className={styles.headerLogoImg}>
-        <Link href="/">
+        <Link href="/" passHref>
           <Image
             src={"/assets/img/logo.webp"}
             alt="logo of doge cart"
