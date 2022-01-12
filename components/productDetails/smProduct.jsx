@@ -13,7 +13,9 @@ export default function SmProduct({ product }) {
       <div className={styles.smallProductOuterContainer}>
         <Image src={product.productUrl} alt="productImg" layout="fill" />
         <Link
-          href={`/products/${product.category}/${product.subCategory}/${product.id}`}
+          href={`/products/${product.category}/${product.subCategory}/${
+            product.id ? product.id : product._id
+          }`}
         >
           <a>
             <div className={styles.hoverDetailsOfProduct}>

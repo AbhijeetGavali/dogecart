@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 // importing components, styles defined
 import Product from "../../../../components/productDetails/product";
 import SmProduct from "../../../../components/productDetails/smProduct";
+import SideBar from "../../../../components/sideBar/SideBar";
 import styles from "../../../../styles/productPage.module.css";
 
 // main functional component
@@ -20,6 +21,7 @@ function ProductDetailPage({
   // returning jsx element to client
   return (
     <div className={styles.productContainer}>
+      <SideBar />
       <div className={styles.productUrl}>
         {/* top navigation link */}
         <Link href="/">home</Link>/<Link href="/products">products</Link>/
@@ -115,6 +117,7 @@ export async function getServerSideProps(ctx) {
     return { props: propData };
   } catch (e) {
     console.log(e);
+    return { props: propData };
   }
 }
 

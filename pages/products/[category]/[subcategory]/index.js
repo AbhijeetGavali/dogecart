@@ -1,10 +1,11 @@
 // importing dependencies
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // importing components, styles defined
 import SmProduct from "../../../../components/productDetails/smProduct";
+import SideBar from "../../../../components/sideBar/SideBar";
 import styles from "../../../../styles/subCatrgoryProductPage.module.css";
 
 // main functional component
@@ -21,9 +22,15 @@ function Subcategory({ categoryProducts, subCategoryProducts }) {
     useState(subCategoryProducts);
   const [count, setCount] = useState({ category: 10, subcategory: 30 });
 
+  useEffect(() => {
+    setcategoryProduct(categoryProducts);
+    setSubCategoryProduct(subCategoryProducts);
+  }, [categoryProducts, subCategoryProducts]);
+
   // returning jsx element to client
   return (
     <div className={styles.productContainer}>
+      <SideBar />
       <div className={styles.productNavContainer}>
         <div className={styles.productUrl}>
           {/* top navigation link */}
@@ -105,10 +112,10 @@ function Subcategory({ categoryProducts, subCategoryProducts }) {
                 .then((response) => response.json())
                 .then((data) => {
                   if (data.data !== "not-found") {
-                    setSubCategoryProduct([...data.data]);
+                    setcategoryProduct([...data.data]);
                     setCount({ ...count, subcategory: count.subcategory + 10 });
                   } else {
-                    setSubCategoryProduct([]);
+                    setcategoryProduct([]);
                   }
                 });
             }}
@@ -125,7 +132,7 @@ function Subcategory({ categoryProducts, subCategoryProducts }) {
 export async function getServerSideProps(ctx) {
   const IP2 = process.env.BACKEND_IP;
   const { category, subcategory } = ctx.query;
-
+  console.log(`getServerSideProps`, category, subcategory);
   // define props object to usee
   var propData = {
     categoryProducts: [],

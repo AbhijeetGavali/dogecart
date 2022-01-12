@@ -1,29 +1,36 @@
+// importing dependancies
 import Link from "next/link";
-import { useRouter } from "next/router";
+
+// importing components, styles defined
 import SmProduct from "../../components/productDetails/smProduct";
+import SideBar from "../../components/sideBar/SideBar";
 import styles from "../../styles/products.module.css";
-import { data } from "../../data/product"; // remove befor production
 
-function Category({ categoryProducts }) {
-  const router = useRouter();
+function AllPRoducts({ allPRoducts }) {
+  // define IP of backend to get data
+  const IP = "http://localhost:5000";
 
+  // returning jsx element to client
   return (
     <div className={styles.productContainer}>
-      <div className={styles.productUrl}>
-        <Link href="/">home</Link>/<Link href="/products">products</Link>/
+      <SideBar />
+      <div className={styles.productNavContainer}>
+        <div className={styles.productUrl}>
+          <Link href="/">home</Link>/<Link href="/products">products</Link>/
+        </div>
+        <select name="sort" id="sort" className={styles.sortOption}>
+          <option default value="select">
+            Select Filter
+          </option>
+          <option value="highRated">High Rated</option>
+          <option value="Latest">New Posted</option>
+        </select>
       </div>
-      <select name="sort" id="sort" className={styles.sortOption}>
-        <option default value="select">
-          Select Filter
-        </option>
-        <option value="highRated">High Rated</option>
-        <option value="Latest">New Posted</option>
-      </select>
-      {categoryProducts.length > 0 && (
+      {allPRoducts.length > 0 && (
         <div className={styles.categoryOuterContainer}>
-          <h2>simmilar products for </h2>
+          <h2>Products we have </h2>
           <div className={styles.categoryContainer}>
-            {categoryProducts.map((product, idx) => (
+            {allPRoducts.map((product, idx) => (
               <SmProduct key={idx} product={product} />
             ))}
           </div>
@@ -34,31 +41,31 @@ function Category({ categoryProducts }) {
   );
 }
 
-Category.getInitialProps = async (ctx) => {
-  const IP = process.env.IP;
-  const { category } = ctx.query;
+// generating initial props for loading initial page on server
+export async function getServerSideProps(ctx) {
+  const IP2 = process.env.BACKEND_IP;
 
-  // fetching product details from category
+  // fetching all products awailable
   var propData = {
-    categoryProducts: [],
+    allPRoducts: [],
   };
   try {
-    await fetch(`${IP}/api/product/${category}`)
+    await fetch(`${IP2}/api/product`)
       .then((response) => response.json())
       .then((data) => {
         data.data !== "not-found"
-          ? (propData = { ...propData, categoryProducts: [...data.data] })
+          ? (propData = { ...propData, allPRoducts: [...data.data] })
           : propData;
       });
 
-    return propData;
+    return { props: propData };
   } catch (e) {
-    console.log(e);
-    // remove befor production
-    return {
-      categoryProducts: data,
-    };
+    // error occured while fetching data
+    console.log("error from category page : ", e);
+    console.log(`url: ${IP2}/api/product`);
+    console.log(propData);
+    return { props: propData };
   }
-};
+}
 
-export default Category;
+export default AllPRoducts;

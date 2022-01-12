@@ -17,8 +17,9 @@ export default function Product({ product }) {
   });
   rate = rate / product.review.length;
   let width = rate + 1;
+
   return (
-    <div className={`${styles.productDetailsContainer} bg_gradient`}>
+    <div className={`${styles.productDetailsContainerOuter} bg_gradient`}>
       <section>
         <div className={styles.productImgContainer}>
           <div className={styles.productImg}>
@@ -60,7 +61,7 @@ export default function Product({ product }) {
                 <div className={styles.productStoreDetails}>
                   {" "}
                   <p>{product.manufacturar.name}</p>
-                  <p>{product.manufacturar.description}</p>
+                  <p>{product.manufacturar.description.slice(0, 200)}</p>
                 </div>
               </span>{" "}
             </a>

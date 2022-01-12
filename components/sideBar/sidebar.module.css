@@ -31,6 +31,7 @@
   top: -10px;
   border-radius: 8px;
   transition: all 900ms ease-in-out;
+  background: transparent;
 }
 
 .homeSideBarToggledButton {

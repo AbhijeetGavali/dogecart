@@ -1,22 +1,22 @@
-.productDetailsContainer {
+.productDetailsContainerOuter {
   display: flex;
   padding: 3%;
   border-radius: 30px;
 }
 
-.productDetailsContainer section {
+.productDetailsContainerOuter section {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.productDetailsContainer * {
+.productDetailsContainerOuter * {
   background: transparent;
 }
 
 .productImgContainer {
   flex: 3;
-  min-height: 600px;
+  max-height: 600px;
   padding: 5% 10%;
 }
 
@@ -62,7 +62,7 @@
 
 .productDetailsContainer {
   padding: 3%;
-  overflow-x: auto !important;
+  overflow-y: auto !important;
   max-height: 800px;
 }
 .productStoreName {
@@ -268,20 +268,95 @@
   border-bottom: 1px solid #ebebeb;
   font-size: 1.2em;
 }
-/* 
+
 @media screen and (max-width: 768px) {
-  .productDetailsContainer {
+  .productDetailsContainerOuter {
+    flex-direction: column;
+    padding: 1%;
+  }
+
+  .productDetailsContainerOuter section:first-child {
+    flex-direction: row;
+    height: 550px;
+  }
+
+  .productImgContainer {
+    min-height: 300px;
+    padding: 10% 1%;
+    justify-content: center;
+    overflow-x: auto !important;
+    align-items: center;
+  }
+
+  .productImg {
+    width: 320px;
+    height: 400px;
+  }
+
+  .productImgLists {
     display: flex;
-    padding: 3%;
-    border-radius: 30px;
     flex-direction: column;
   }
-  .productDetailsContainer section:nth-child(1) {
+
+  .productStoreName {
+    font-size: 14px;
+  }
+
+  .productStoreName:hover .productStoreHover {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .productStoreLogo {
+    margin: 4% auto;
+  }
+
+  .productStoreHover p:nth-child(1) {
+    font-size: 1em;
+    letter-spacing: inherit;
+  }
+  .productStoreHover p:nth-child(2) {
+    font-size: 14px;
+    letter-spacing: inherit;
+  }
+
+  .detailProductName {
+    font-size: 1em;
+  }
+  .productPriceContainer {
+    font-size: 1em;
+  }
+
+  .discription {
+    letter-spacing: 0px;
+  }
+  .ctaBtns {
+    margin: 1em 0;
+  }
+  .btn {
+    padding: 0.5em 1em;
+    font-size: 0.8em;
+    letter-spacing: 0.5px;
+  }
+
+  .productRatingContainer {
+    gap: 0.2em;
+  }
+
+  .reviewContainer h2,
+  .faqContainer h2 {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 508px) {
+  .productDetailsContainerOuter section:first-child {
+    flex-direction: column;
+    height: 550px;
+  }
+
+  .productImgLists {
     display: flex;
     flex-direction: row;
-    flex: 1;
   }
-  .productImgLists {
-    flex-direction: column;
-  }
-} */
+}

@@ -51,7 +51,7 @@ export default function Searchbar() {
   }, [searchText, activeId]);
 
   const handleKeyDown = (e) => {
-    if (suggestions.length > 1) {
+    if (suggestions.length >= 1) {
       if (e.keyCode === 38 && activeId > 0) {
         setActiveId(activeId - 1);
       } else if (e.keyCode === 38 && activeId === 0) {

@@ -5,6 +5,7 @@ import { useState } from "react";
 
 // importing components, styles defined
 import SmProduct from "../../../components/productDetails/smProduct";
+import SideBar from "../../../components/sideBar/SideBar";
 import styles from "../../../styles/subCatrgoryProductPage.module.css";
 
 // main functional component
@@ -22,6 +23,7 @@ function Category({ categoryProducts }) {
   // returning jsx element to client
   return (
     <div className={styles.productContainer}>
+      <SideBar />
       <div className={styles.productNavContainer}>
         <div className={styles.productUrl}>
           {/* top navigation link */}
