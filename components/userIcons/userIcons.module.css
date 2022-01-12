@@ -1,6 +1,6 @@
 .userIcons {
-  height: 50px;
-  width: 50px;
+  height: 45px;
+  width: 45px;
   border-radius: 25px;
 
   display: flex;
@@ -23,24 +23,22 @@
   position: absolute;
   top: 0;
   right: 0;
-  opacity: 0;
-  transition: all 900ms ease-in-out;
-}
-
-.bottomIcons:nth-child(1) {
   opacity: 1;
+  transition: all 900ms ease-in-out;
 }
 
 .storeIcon,
 .cartIcon,
 .userIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
   background: transparent;
   background-repeat: no-repeat;
   background-position: center center;
   width: 45px;
   height: 45px;
   border-radius: 25px;
-  opacity: 0;
   transition: all 900ms ease-in-out;
 }
 
@@ -50,11 +48,11 @@
 }
 
 .storeIcon {
-  background-image: url("/assets/img/cart_bottom_icon.webp");
+  background-image: url("/assets/img/store_bottom_icon.webp");
 }
 
 .cartIcon {
-  background-image: url("/assets/img/store_bottom_icon.webp");
+  background-image: url("/assets/img/cart_bottom_icon.webp");
 }
 
 .userIcons:hover {
@@ -62,13 +60,10 @@
   gap: 10px;
 }
 
-.userIcons:hover .bottomIcons {
-  position: relative;
-  opacity: 1;
+.userIcons:hover .bottomIcons:last-child {
+  right: 110px;
 }
 
-.userIcons:hover .storeIcon,
-.userIcons:hover .cartIcon,
-.userIcons:hover .userIcon {
-  opacity: 1;
+.userIcons:hover .bottomIcons:nth-child(2) {
+  right: 55px;
 }
