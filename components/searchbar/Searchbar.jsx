@@ -5,7 +5,7 @@ import styles from "../../styles/Home.module.css";
 
 export default function Searchbar() {
   // define IP of backend to get data
-  const IP2 = "http://localhost:5000";
+  const IP2 = "https://dogcart.herokuapp.com";
 
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);

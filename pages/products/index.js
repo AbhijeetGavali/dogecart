@@ -8,7 +8,7 @@ import styles from "../../styles/products.module.css";
 
 function AllPRoducts({ allPRoducts }) {
   // define IP of backend to get data
-  const IP = "http://localhost:5000";
+  const IP = "https://dogcart.herokuapp.com";
 
   // returning jsx element to client
   return (
