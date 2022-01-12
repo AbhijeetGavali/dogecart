@@ -11,7 +11,7 @@ import styles from "../../../styles/subCatrgoryProductPage.module.css";
 // main functional component
 function Category({ categoryProducts }) {
   // define IP of backend to get data
-  const IP = "http://localhost:5000";
+  const IP = "https://dogcart.herokuapp.com";
 
   // using router for geting query from url
   const router = useRouter();
