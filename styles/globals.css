@@ -1,9 +1,24 @@
-html,
-body {
-  padding: 0;
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+
+:root {
+  --font-family: "Manrope", sans-serif;
+  --text-color: #ebebeb;
+  --orange: #ff6047;
+  --blue: #33b2d2;
+  --dark-blue: #4e33ff;
+  --background-color: #1b1b1b;
+}
+
+* {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  scroll-behavior: smooth;
+  transition: all 300ms ease-in-out;
 }
 
 a {
@@ -11,6 +26,29 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+.app {
+  width: 100vw;
+  height: 100vh;
+  font-family: var(--font-family);
+  position: relative;
+  z-index: 0;
+}
+
+.bg_gradient {
+  background: linear-gradient(90.3deg, #4e33ff, #33b2d2);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: "Heebo", sans-serif !important;
+}
+
+h1,
+h3 {
+  letter-spacing: 1px !important;
 }

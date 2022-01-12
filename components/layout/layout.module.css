@@ -1,0 +1,90 @@
+/* css code for header styles */
+.header {
+  height: 60px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 9999999;
+
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 10px;
+}
+
+.header .headerLogoImg {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px 0 30px;
+}
+
+.header .headerLogoName {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0.11em;
+
+  display: flex;
+  align-items: center;
+}
+
+.header .headerLogoName span {
+  margin-left: 10px;
+  color: var(--orange);
+}
+
+.header .headerLogoName span:nth-child(2) {
+  color: var(--blue);
+}
+
+/* css code for middle and main block  */
+.main {
+  width: 100vw;
+  height: 100vh;
+  padding: 70px 30px 30px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+/* css code for copyright sec footer  */
+.footer {
+  height: 25px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 9999999;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.1em;
+
+  padding: 0 30px;
+  justify-content: space-between;
+}
+
+.footer .linkGroup {
+  display: flex;
+  gap: 20px;
+}
+
+@media screen and (max-width: 588px) {
+  /* css code for copyright sec footer  */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: inherit;
+    padding: 0 10px;
+    width: 100%;
+    height: 50px;
+  }
+}
