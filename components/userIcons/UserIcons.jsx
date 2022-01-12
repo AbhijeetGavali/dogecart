@@ -36,8 +36,8 @@ export default function UserIcons() {
           ></div>
         </div>
       </div>
-      {!toggleCart && <Cart />}
-      {!userHome && <MiniDashboard />}
+      {toggleCart && <Cart />}
+      {userHome && <MiniDashboard />}
     </>
   );
 }
