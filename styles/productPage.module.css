@@ -33,3 +33,12 @@
   overflow-x: scroll;
   width: 100%;
 }
+
+@media screen and (max-width: 588px) {
+  .categoryContainer {
+    flex-direction: column;
+    overflow: unset;
+    width: 100%;
+    align-items: center;
+  }
+}
