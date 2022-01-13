@@ -15,6 +15,7 @@ const data = {
     type: String,
     required: true,
   },
+  verify: { type: Boolean, default: false },
   password: { type: String, required: true },
   shippingDetails: {
     street: {
@@ -43,7 +44,6 @@ const data = {
       tracker: { type: Object },
     },
   ],
-  totalSpend: { type: Number },
   ratedProduct: { type: Array },
   refferal: { type: Array },
 };

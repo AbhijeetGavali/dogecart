@@ -10,9 +10,9 @@ const bcrypt = require("bcryptjs");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const User = require("../../auth/database/mongoModels/user/user.model");
-const UserPassword = require("../../auth/database/mongoModels/user/userPassword.model");
 const mailer = require("../middleware/mailer");
 
+// get reset screen while click on mail
 router.get("/:token", async (req, res) => {
   const { token } = req.params;
   if (!token) {
@@ -29,15 +29,16 @@ router.get("/:token", async (req, res) => {
   }
 });
 
+// get reset link via mail
 router.put("/:email", async (req, res) => {
   const email = req.params.email;
   try {
     // Check whether the user with this email exists
-    let user = await User.findOne({ userEmail: email });
+    let user = await User.findOne({ userEmail: email }, "email");
     if (!user) {
       return res
         .status(400)
-        .json({ error: "Sorry a user with this email not exists" });
+        .json({ error: ["Sorry a user with this email not exists"] });
     }
 
     var userId = user.id;
@@ -59,13 +60,14 @@ router.put("/:email", async (req, res) => {
       MAILER_TEMPLATE: htmlData,
     };
     let responce = await mailer(props);
-    return res.status(200).send(responce);
+    return res.status(200).json({ data: "Mail Send" });
   } catch (error) {
     console.error(error.message);
-    return res.status(500).send("Internal Server Error");
+    return res.status(500).json({ data: "Internal Server Error" });
   }
 });
 
+// reset your password
 router.patch(
   "/:token",
   [
@@ -86,10 +88,10 @@ router.patch(
       const salt = await bcrypt.genSalt(10);
       const securePassword = await bcrypt.hash(new_password, salt);
 
-      await UserPassword.findOneAndUpdate(
+      await User.findOneAndUpdate(
         { userId },
         {
-          userPassword: securePassword,
+          password: securePassword,
         }
       );
       res.send("done");
