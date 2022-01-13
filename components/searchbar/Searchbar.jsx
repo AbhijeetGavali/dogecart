@@ -89,7 +89,7 @@ export default function Searchbar() {
       >
         <div className={`${styles.searchBar}  bg_gradient`}>
           <Image
-            src={"/assets/img/logo.webp"}
+            src={"/assets/img/dogelogo.webp"}
             alt="logo of doge cart"
             width="30px"
             height="30px"
