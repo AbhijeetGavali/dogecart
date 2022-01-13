@@ -6,7 +6,6 @@ import styles from "../../../styles/newOrder.module.css";
 
 export default function NewOrder() {
   const { login, user, cart } = useSelector((state) => {
-    console.log(state);
     return {
       login: state.user.user.login,
       user: state.user.user,
