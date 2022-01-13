@@ -8,7 +8,7 @@ export default function Header() {
       <div className={styles.headerLogoImg}>
         <Link href="/" passHref>
           <Image
-            src={"/assets/img/logo.webp"}
+            src={"/assets/img/dogelogo.webp"}
             alt="logo of doge cart"
             width="40px"
             height="40px"
