@@ -12,7 +12,7 @@ export default function NewOrder() {
       cart: state.order.shoppingCart,
     };
   });
-  user = user
+  const userDetails = user.login
     ? { ...user }
     : {
         name: { userFirstName: "", userLastName: "" },
@@ -24,20 +24,20 @@ export default function NewOrder() {
         },
       };
   const [name, setName] = useState({
-    firstName: user.name.userFirstName,
-    lastName: user.name.userLastName,
+    firstName: userDetails.name.userFirstName,
+    lastName: userDetails.name.userLastName,
   });
-  const [email, setEmail] = useState(user.email);
+  const [email, setEmail] = useState(userDetails.email);
   const [mobileNumber, setMobileNumber] = useState("");
   const [address1, setAddress1] = useState(
-    user.shippingDetails.street.address1
+    userDetails.shippingDetails.street.address1
   );
   const [address2, setAddress2] = useState(
-    user.shippingDetails.street.address2
+    userDetails.shippingDetails.street.address2
   );
-  const [city, setCity] = useState(user.shippingDetails.city);
-  const [state, setState] = useState(user.shippingDetails.state);
-  const [pincode, setPincode] = useState(user.shippingDetails.pincode);
+  const [city, setCity] = useState(userDetails.shippingDetails.city);
+  const [state, setState] = useState(userDetails.shippingDetails.state);
+  const [pincode, setPincode] = useState(userDetails.shippingDetails.pincode);
 
   var amount = 0;
   cart.map((product) => {
