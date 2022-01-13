@@ -12,6 +12,17 @@ export default function NewOrder() {
       cart: state.order.shoppingCart,
     };
   });
+  user = user
+    ? { ...user }
+    : {
+        name: { userFirstName: "", userLastName: "" },
+        shippingDetails: {
+          street: { address1: "", address2: "" },
+          city: "",
+          state: "",
+          pincode: "",
+        },
+      };
   const [name, setName] = useState({
     firstName: user.name.userFirstName,
     lastName: user.name.userLastName,

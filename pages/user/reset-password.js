@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../../styles/resetPass.module.css";
-const IP = "http://localhost:5000";
+const IP = "https://dogcart.herokuapp.com";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState("");

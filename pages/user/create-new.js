@@ -7,7 +7,7 @@ import styles from "../../styles/userCreateNew.module.css";
 
 export default function CreateNewUser() {
   // define IP of backend to get data
-  const IP = "http://localhost:5000";
+  const IP = "https://dogcart.herokuapp.com";
   const login = useSelector((state) => {
     return state.user.user.login;
   });
