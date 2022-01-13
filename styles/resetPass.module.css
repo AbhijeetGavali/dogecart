@@ -1,0 +1,60 @@
+.forgetPasswordContainer {
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forgetPasswordForm {
+  max-width: 600px;
+  width: 80%;
+  background-color: rgba(0, 183, 255, 0.342);
+  box-shadow: 2px 2px 3px rgba(208, 246, 255, 0.527);
+  text-align: left;
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 50px 20px;
+  border-radius: 20px;
+}
+
+.forgetPasswordForm * {
+  background-color: transparent;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+.formField label {
+  padding: 7px 13px 0px;
+}
+.formField input {
+  padding: 7px 13px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background: rgba(2, 1, 1, 0.418);
+}
+.btn {
+  width: max-content;
+  border-radius: 20px;
+  padding: 5px 14px;
+}
+.formField input[type="submit"] {
+  background: transparent;
+}
+.btn:hover {
+  box-shadow: 1px 1px 2px black;
+}
+.reset-pass {
+  padding: 7px 13px;
+  font-size: 14px;
+}

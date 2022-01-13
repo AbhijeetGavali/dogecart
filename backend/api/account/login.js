@@ -8,7 +8,6 @@ const bcrypt = require("bcryptjs");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const User = require("../../auth/database/mongoModels/user/user.model");
-const UserPassword = require("../../auth/database/mongoModels/user/userPassword.model");
 
 router.post(
   "/",
@@ -26,27 +25,23 @@ router.post(
 
     const { email, password } = req.body;
     try {
-      let user = await User.findOne({ email });
+      let user = await User.findOne({ email }, "email password verify");
       if (!user) {
-        success = false;
         return res
           .status(400)
-          .json({ error: "Please try to login with correct credentials" });
+          .json({ error: ["Please try to login with correct credentials"] });
       }
-      let userId = user._id;
-      console.log(userId);
+      if (!user.verify) {
+        return res
+          .status(400)
+          .json({ error: ["Please verify your email first"] });
+      }
 
-      const userPass = await UserPassword.findOne({ userId });
-      const passwordCompare = await bcrypt.compare(
-        password,
-        userPass.userPassword
-      );
+      const passwordCompare = await bcrypt.compare(password, user.password);
 
       if (!passwordCompare) {
-        success = false;
         return res.status(400).json({
-          success,
-          error: "Please try to login with correct credentials",
+          error: ["Please try to login with correct credentials"],
         });
       }
 
@@ -57,9 +52,14 @@ router.post(
           id: user.id,
         },
       };
+
+      user = await User.findById(
+        user.id,
+        "email name shippingDetails cart wishlist order"
+      );
+
       const authtoken = jwt.sign(data, JWT_SECRET);
-      success = true;
-      res.json({ success, authtoken });
+      res.json({ authtoken, user });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");

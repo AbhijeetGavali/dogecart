@@ -13,7 +13,10 @@
   bottom: 30px;
   color: var(--orange);
   padding: 3px;
-  transition: all 900ms ease-in-out;
+  transition: all 400ms ease-in-out;
+  background: transparent;
+
+  z-index: 99999;
 }
 
 .bottomIcons {
@@ -24,7 +27,7 @@
   top: 0;
   right: 0;
   opacity: 1;
-  transition: all 900ms ease-in-out;
+  transition: all 400ms ease-in-out;
 }
 
 .storeIcon,
@@ -39,7 +42,7 @@
   width: 45px;
   height: 45px;
   border-radius: 25px;
-  transition: all 900ms ease-in-out;
+  transition: all 400ms ease-in-out;
 }
 
 .userIcon {

@@ -1,0 +1,134 @@
+.red {
+  color: red;
+}
+
+.newUSerFormBoxContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 4em 3rem;
+}
+
+.newUserHeader {
+  flex: 2;
+}
+
+.newUserHeader h3 {
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 64px;
+  line-height: 30px;
+}
+.newUserHeader p {
+  font-family: var(--font-family);
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  margin-top: 2rem;
+}
+
+.newUSerFormBox {
+  flex: 4;
+  margin-top: 3rem;
+}
+.newUSerForm {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.newUSerForm span {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  width: 100%;
+}
+
+.formGroup {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin: 1rem 0rem 0rem;
+}
+
+.formInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  border: none;
+  border-bottom: 2px solid rgba(0, 255, 255, 0.075);
+  border-radius: 5px;
+  outline: none;
+  font-size: 20px;
+  padding: 0.8rem 1rem;
+  background-color: #051b3d;
+}
+
+.formLable {
+  position: absolute;
+  top: 0.8rem;
+  left: 1rem;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  padding: 0 0.5rem;
+  cursor: text;
+  transition: all 100ms ease-in-out;
+  font-family: "Poppins", sans-serif;
+  width: max-content;
+  height: max-content;
+  background: transparent;
+}
+
+.formInput:focus ~ .formLable,
+.formInput:not(:placeholder-shown).formInput:not(:focus) ~ .formLable {
+  top: -0.5rem;
+  font-size: 0.8rem;
+  left: 0.8rem;
+}
+
+.formBtn {
+  width: 50%;
+  margin-left: 25%;
+  height: 100%;
+  border-radius: 20px;
+  border: none;
+  margin-top: 2.5rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .newUserHeader h3 {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .newUSerFormBoxContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 4em 1rem;
+  }
+
+  .newUSerFormBox {
+    flex: 4;
+    width: 100%;
+  }
+  .newUSerForm span {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.formInput[type="number"]::-webkit-inner-spin-button,
+.formInput[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
