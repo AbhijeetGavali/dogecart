@@ -6,6 +6,7 @@
   height: 500px;
   background: rgba(0, 38, 255, 0.555);
   border-radius: 10px;
+  z-index: 999;
 }
 .userCartHeadline {
   padding: 10px 20px;
@@ -101,4 +102,8 @@
   padding: 5px 0 0 0;
   height: 400px;
   overflow: auto;
+}
+
+.notLogedIn {
+  padding: 20px;
 }

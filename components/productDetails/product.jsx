@@ -1,15 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Faq from "../faq/Faq";
 import Batch from "./Batch";
 import styles from "./product.module.css";
+import { addToCart } from "../../redux/action/cartActions";
+import { buyProduct } from "../../redux/action/shopActions";
+
 export default function Product({ product }) {
   const [mainProductUrl, setMainProductUrl] = useState(product.productUrl[0]);
   const [reviewTodesplay, setReviewTodesplay] = useState(3);
+  const [choice, setChoice] = useState({});
+
+  const { login } = useSelector((state) => {
+    return {
+      login: state.user.user.login,
+    };
+  });
+
+  const dispatch = useDispatch();
   useEffect(() => {
     setMainProductUrl(product.productUrl[0]);
   }, [product]);
+
   let rate = 0;
   let rateArray = [1, 2, 3, 4, 5];
   product.review.map((review) => {
@@ -90,6 +104,9 @@ export default function Product({ product }) {
                   name="color"
                   value={color}
                   id={"color" + idx}
+                  onChange={(e) => {
+                    setChoice({ ...choice, color: e.currentTarget.value });
+                  }}
                 />
                 <label
                   htmlFor={"color" + idx}
@@ -109,6 +126,9 @@ export default function Product({ product }) {
                   name="size"
                   value={size}
                   id={"size" + idx}
+                  onChange={(e) => {
+                    setChoice({ ...choice, size: e.currentTarget.value });
+                  }}
                 />
                 <label
                   htmlFor={"size" + idx}
@@ -149,12 +169,34 @@ export default function Product({ product }) {
           <button
             className={styles.btn}
             onClick={() => {
-              dispatch(addToCart());
+              // login
+              //   ?
+              dispatch(
+                addToCart({
+                  ...product,
+                  choice,
+                })
+              );
+              // : alert("login first");
             }}
           >
             ADD TO BAG
           </button>
-          <button className={styles.btn}>BUY</button>
+          <button
+            className={styles.btn}
+            onClick={() => {
+              login
+                ? dispatch(
+                    buyProduct({
+                      ...product,
+                      choice,
+                    })
+                  )
+                : alert("login first");
+            }}
+          >
+            BUY
+          </button>
         </div>
         <div className={styles.discription}>{product.description}</div>
         <div>

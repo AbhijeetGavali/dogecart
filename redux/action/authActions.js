@@ -1,9 +1,9 @@
-import { ActionTypes } from "../constants/actionTypes";
+import { ActionTypes } from "../const/actionTypes";
 
-export const userLogin = (auth) => {
+export const userLogin = (user) => {
   return {
     type: ActionTypes.USER_LOGIN,
-    payload: { auth },
+    payload: { auth: user.authtoken, ...user.user },
   };
 };
 

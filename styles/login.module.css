@@ -1,0 +1,53 @@
+.loginContainer {
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loginForm * {
+  background-color: transparent;
+}
+.loginForm {
+  max-width: 600px;
+  width: 80%;
+  background-color: #0b60ff8c;
+  text-align: left;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.loginHeading {
+  font-weight: bold;
+  padding: 13px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.field label {
+  padding: 7px 13px 0px;
+  margin-bottom: 20px;
+}
+.field input {
+  padding: 7px 13px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background: rgba(0, 0, 0, 0.493);
+}
+.field input[type="submit"] {
+  width: 50%;
+  margin: auto;
+}
+.field input[type="submit"]:hover {
+  box-shadow: 1px 1px 2px black;
+}
+.resetPass {
+  padding: 7px 13px;
+  font-size: 14px;
+}

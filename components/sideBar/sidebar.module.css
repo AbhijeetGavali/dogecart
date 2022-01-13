@@ -19,7 +19,7 @@
   border-radius: 25px;
   box-shadow: 1px 4px 10px rgba(8, 29, 34, 0.507);
   z-index: 1;
-  transition: all 900ms ease-in-out;
+  transition: all 400ms ease-in-out;
   transform: rotate(180deg);
 }
 
@@ -30,7 +30,7 @@
   right: -300px;
   top: -10px;
   border-radius: 8px;
-  transition: all 900ms ease-in-out;
+  transition: all 400ms ease-in-out;
   background: transparent;
 }
 
@@ -46,7 +46,7 @@
   border-radius: 25px;
   box-shadow: 1px 4px 10px rgba(8, 29, 34, 0.507);
   z-index: 1;
-  transition: all 900ms ease-in-out;
+  transition: all 400ms ease-in-out;
 }
 
 .homeSideBarToggledMenu {
@@ -58,7 +58,7 @@
   background: #383838;
   border-radius: 10px;
   border-radius: 8px;
-  transition: all 900ms ease-in-out;
+  transition: all 400ms ease-in-out;
 }
 
 .homeSideBarToggleMenu * {

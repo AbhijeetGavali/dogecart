@@ -1,95 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./cart.module.css";
+import {
+  incrementCart,
+  decrementCart,
+  removeFromCart,
+} from "../../redux/action/cartActions";
+import { buyFromCart } from "../../redux/action/shopActions";
+import { useRouter } from "next/router";
 
 export default function Cart() {
-  const cart = [
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product first sell",
-      price: 342,
-      qty: 2,
-      extraDetails: {
-        color: ["red"],
-      },
-    },
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product secon lorem ipsem doller d sell",
-      price: 5,
-      qty: 1,
-      extraDetails: {
-        color: ["red"],
-      },
-    },
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product third sell",
-      price: 520,
-      qty: 4,
-      extraDetails: {
-        color: ["red"],
-        size: "M",
-      },
-    },
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product first sell",
-      price: 342,
-      qty: 2,
-      extraDetails: {
-        color: ["red"],
-      },
-    },
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product secon lorem ipsem doller d sell",
-      price: 5,
-      qty: 1,
-      extraDetails: {
-        color: ["red"],
-      },
-    },
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product third sell",
-      price: 520,
-      qty: 4,
-      extraDetails: {
-        color: ["red"],
-        size: "M",
-      },
-    },
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product first sell",
-      price: 342,
-      qty: 2,
-      extraDetails: {
-        color: ["red"],
-      },
-    },
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product secon lorem ipsem doller d sell",
-      price: 5,
-      qty: 1,
-      extraDetails: {
-        color: ["red"],
-      },
-    },
-    {
-      url: "https://media.istockphoto.com/photos/farms-the-source-of-all-food-picture-id1303739157?b=1&k=20&m=1303739157&s=170667a&w=0&h=-Sy_PQcmcaDgvH1H5jEZi4Zoopuxem8dTBtXzvJW_xg=",
-      title: "product third sell",
-      price: 520,
-      qty: 4,
-      extraDetails: {
-        color: ["red"],
-        size: "M",
-      },
-    },
-  ];
+  const { login, cart } = useSelector((state) => {
+    return { login: state.user.user.login, cart: state.cart.cart };
+  });
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   var amount = 0;
   cart.map((product) => {
     amount += product.price;
@@ -97,58 +26,114 @@ export default function Cart() {
 
   return (
     <div className={`${styles.userCart}`}>
-      <div className={styles.userCartHeadline}>
-        <h2>Cart</h2>
-        <Link href={"/user/cart"}>see details</Link>
-      </div>
-      <div className={styles.cartBody}>
-        {cart.map((product, idx) => (
-          <div key={idx} className={styles.product}>
-            <div className={styles.productImageContainer}>
-              <div className={styles.productImage}>
-                <Image
-                  src={product.url}
-                  layout="fill"
-                  alt={product.title + "image"}
-                />
-              </div>
-            </div>
-            <div className={styles.productDetails}>
-              <h3>{product.title}</h3>
-              <div>
-                <span className={styles.amt}>
-                  <span>Amt:</span>
-                  <span>{product.price}</span>
-                </span>
-                <div className={styles.qyt}>
-                  <span>Qyt:</span>
-                  <button className={styles.btn}>-</button>
-                  <span>{product.qty} </span>
-                  <button className={styles.btn}>+</button>
-                </div>
-              </div>
-            </div>
-            <div className={styles.removeBtn}>
-              <button className={styles.btn}>
-                <Image
-                  src={"/assets/img/removeFromCart.webp"}
-                  alt="Remove from Cart"
-                  width="15px"
-                  height="15px"
-                />
-              </button>
-            </div>
+      {login ? (
+        <>
+          <div className={styles.userCartHeadline}>
+            <h2>Cart</h2>
+            <Link href={"/user/cart"}>see details</Link>
           </div>
-        ))}
-      </div>
-      <div className={styles.cartFooter}>
-        <div className="totalAmount">Cart ammount: {amount}</div>
-        <button
-          className={styles.btn + " " + styles.checkOutBtn + " bg_gradient"}
-        >
-          Checkout
-        </button>
-      </div>
+          <div className={styles.cartBody}>
+            {cart.length > 0 &&
+              cart.map((product, idx) => (
+                <div key={idx} className={styles.product}>
+                  <div className={styles.productImageContainer}>
+                    <div className={styles.productImage}>
+                      <Image
+                        src={product.productUrl[0]}
+                        layout="fill"
+                        alt={product.title + "image"}
+                      />
+                    </div>
+                  </div>
+                  <div className={styles.productDetails}>
+                    <h3>
+                      <Link
+                        href={`/products/${product.category}/${product.subCategory}/${product.id}`}
+                      >
+                        {product.title}
+                      </Link>
+                    </h3>
+                    <div>
+                      <span className={styles.amt}>
+                        <span>Amt:</span>
+                        <span>{product.price}</span>
+                      </span>
+                      <div className={styles.qyt}>
+                        <span>Qyt:</span>
+                        <button
+                          className={styles.btn}
+                          onClick={() => {
+                            dispatch(decrementCart(idx));
+                          }}
+                        >
+                          -
+                        </button>
+                        <span>{product.count} </span>
+                        <button
+                          className={styles.btn}
+                          onClick={() => {
+                            dispatch(incrementCart(idx));
+                          }}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.removeBtn}>
+                    <button
+                      className={styles.btn}
+                      onClick={() => {
+                        dispatch(removeFromCart(idx));
+                      }}
+                    >
+                      <Image
+                        src={"/assets/img/removeFromCart.webp"}
+                        alt="Remove from Cart"
+                        width="15px"
+                        height="15px"
+                      />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            {!cart.length > 0 && (
+              <Link href="/">
+                <a>
+                  Your cart is empty,
+                  <br /> Brouse Products
+                </a>
+              </Link>
+            )}
+          </div>
+          <div className={styles.cartFooter}>
+            <div className="totalAmount">Cart ammount: {amount}</div>
+            <button
+              className={styles.btn + " " + styles.checkOutBtn + " bg_gradient"}
+              onClick={() => {
+                dispatch(buyFromCart(cart));
+                router.push({
+                  pathname: "/user/orders/new",
+                });
+              }}
+            >
+              Checkout
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className={styles.notLogedIn}>
+          <h2>Cart</h2>
+          <p>
+            {" "}
+            You are not loged in <br />
+            Please log in{" "}
+            <Link href="/user/login">
+              <a style={{ color: "skyblue" }}>here</a>
+            </Link>
+          </p>
+        </div>
+      )}
     </div>
   );
 }
